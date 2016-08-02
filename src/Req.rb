@@ -1,45 +1,50 @@
 require 'net/http'
 require 'uri'
 
-class Req
+module Req
 
-  def initialize(url)
-    get url
-  end
+  class Get
 
-  def get(url)
-    uri = URI.parse(url)
-    @http = Net::HTTP.new(url.host, uri.port)
-    @request = Net::HTTP::Get.new(uri.to_s)
-    return self
-  end
-
-  def body
-    return @body
-  end
-
-  def headers(headers)
-    headers.each do |key, val|
-      @request[key] = val
+    def initialize(url)
+      get url
     end
-    return self
+
+    def get(url)
+      uri = URI.parse(url)
+      @http = Net::HTTP.new(url.host, uri.port)
+      @request = Net::HTTP::Get.new(uri.to_s)
+      return self
+    end
+
+    def body
+      return @body
+    end
+
+    def headers(headers)
+      headers.each do |key, val|
+        @request[key] = val
+      end
+      return self
+    end
+
+    def asJson
+      @request["Accept"] = "application/json"
+      return self
+    end
+
+    def body
+      return @response.body
+    end
+
+    def status_code
+      return @response.code
+    end
+
+    def exec
+      @response = http.request request
+      return self
+    end
+
   end
 
-  def asJson
-    @request["Accept"] = "application/json"
-    return self
-  end
-
-  def body
-    return @response.body
-  end
-
-  def status_code
-    return @response.code
-  end
-
-  def exec
-    @response = http.request request
-    return self
-  end
 end
