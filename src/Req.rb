@@ -16,10 +16,6 @@ module Req
       return self
     end
 
-    def body
-      return @body
-    end
-
     def headers(headers)
       headers.each do |key, val|
         @request[key] = val
