@@ -53,6 +53,10 @@ module Req
       post url
     end
 
+    def initialize
+      return self
+    end
+
     def post(url)
       uri = URI.parse(url)
       @http = Net::HTTP.new(uri.host, uri.port)
