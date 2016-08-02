@@ -9,10 +9,14 @@ module Req
       get url
     end
 
+    def initialize
+      return self
+    end
+
     def get(url)
       uri = URI.parse(url)
-      @http = Net::HTTP.new(url.host, uri.port)
-      @request = Net::HTTP::Get.new(uri.to_s)
+      @http = Net::HTTP.new(uri.host, uri.port)
+      @request = Net::HTTP::Get.new(uri.request_uri)
       return self
     end
 
@@ -37,7 +41,7 @@ module Req
     end
 
     def exec
-      @response = @http.request request
+      @response = @http.request @request
       return self
     end
 
@@ -74,7 +78,7 @@ module Req
     end
 
     def exec
-      @response = @http.request request
+      @response = @http.request @request
       return self
     end
 
