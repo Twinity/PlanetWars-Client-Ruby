@@ -1,10 +1,10 @@
 class Main
-    
-    def hello()
-        puts "Hello World!"
-    end
+
+  def initialize
+    server = PServer.new
+  end
 
 end
 
-main = Main.new
-main.hello
+puts 'Starting client app...'
+app = Main.new
