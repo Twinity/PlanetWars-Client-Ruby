@@ -27,7 +27,7 @@ module Req
     end
 
     def as_json
-      @request["Accept"] = "application/json"
+      @request['Accept'] = 'application/json'
       self
     end
 
@@ -70,7 +70,7 @@ module Req
     end
 
     def as_json
-      @request["Content-type"] = "application/json"
+      @request['Content-type'] = 'application/json'
       self
     end
 
