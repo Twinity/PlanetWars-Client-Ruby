@@ -47,5 +47,5 @@ class World
   def get_neutral_id
     @neutral_id
   end
-  
+
 end
