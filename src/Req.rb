@@ -5,93 +5,91 @@ module Req
 
   class Get
 
-    def initialize(url)
-      get url
-    end
-
-    def initialize
-      return self
+    def initialize(*args)
+      if args.length == 1
+        get url
+      end
+      self
     end
 
     def get(url)
       uri = URI.parse(url)
       @http = Net::HTTP.new(uri.host, uri.port)
       @request = Net::HTTP::Get.new(uri.request_uri)
-      return self
+      self
     end
 
     def headers(headers)
       headers.each do |key, val|
         @request[key] = val
       end
-      return self
+      self
     end
 
     def as_json
       @request["Accept"] = "application/json"
-      return self
+      self
     end
 
     def body
-      return @response.body
+      @response.body
     end
 
     def status_code
-      return @response.code
+      @response.code
     end
 
     def exec
       @response = @http.request @request
-      return self
+      self
     end
 
   end
 
   class Post
 
-    def initialize(url)
-      post url
-    end
-
-    def initialize
-      return self
+    def initialize(*args)
+      if args.length == 1
+        post url
+      end
+      self
     end
 
     def post(url)
       uri = URI.parse(url)
       @http = Net::HTTP.new(uri.host, uri.port)
       @request = Net::HTTP::Post.new(uri.request_uri)
-      return self
+      self
     end
 
     def headers(headers)
       headers.each do |key, val|
         @request[key] = val
       end
-      return self
+      self
     end
 
     def as_json
       @request["Content-type"] = "application/json"
-      return self
+      self
     end
 
     def set_body(body)
       @request.body = body
-      return self
+      self
     end
 
     def exec
       @response = @http.request @request
-      return self
+      self
     end
 
     def body
-      return @response.body
+      @response.body
     end
 
     def status_code
-      return @response.code
+      @response.code
     end
 
   end
