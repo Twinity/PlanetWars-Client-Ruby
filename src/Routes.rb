@@ -24,12 +24,13 @@ class Routes
 
   def send_state(army_movement)
     url = "http://localhost:#{@server_port}/clientdata"
+    data = JSON.generate army_movement
     http = Req::Post.new
     response = http
                    .post(url)
                    .as_json
                    .headers('X-Reqiest-ID' => server.get_my_id)
-                   .set_body(army_movement)
+                   .set_body(data)
                    .exec
                    .body
   end
