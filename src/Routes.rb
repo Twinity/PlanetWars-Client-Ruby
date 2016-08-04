@@ -19,7 +19,7 @@ class Routes
 
       break if data != 'wait'
     end
-    world = JSON.parser data
+    world = JSON.parse data
   end
 
   def send_state(army_movement)
